@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:ecommerce_task/core/network/api_client.dart';
 
+import '../core/client/api_client.dart';
 import '../model/product.dart';
 
 abstract class IRemoteRepository {
@@ -14,7 +14,7 @@ class RemoteRepository implements IRemoteRepository {
 
   @override
   Future<List<Product>> getProducts() async {
-    final response = await _apiClient.get('/products');
+    final response = await _apiClient.getProducts();
     return response.data.map<Product>((e) => Product.fromJson(e)).toList();
   }
 }

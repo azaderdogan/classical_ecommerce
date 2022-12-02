@@ -11,6 +11,8 @@ class CartEventRemoveFromCart extends CartEvent {
 
 class CartEventAddToCart extends CartEvent {
   final int productId;
-  
+
   CartEventAddToCart(this.productId);
 }
+
+class CartEventLoadCart extends CartEvent {}

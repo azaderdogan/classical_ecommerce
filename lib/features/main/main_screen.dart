@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../widgets/widgets.dart';
 import '../cart/cart_screen.dart';
 import '../home/home_screen.dart';
 
@@ -17,33 +18,16 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       body: _buildBody(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
-        items: [
-          const BottomNavigationBarItem(
+        items: const [
+          BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Stack(clipBehavior: Clip.none, children: [
-              const Icon(Icons.shopping_cart),
-              Positioned(
-                top: -5,
-                right: -10,
-                child: Container(
-                  width: 20,
-                  height: 20,
-                  decoration: const BoxDecoration(
-                    color: Colors.red,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Center(
-                    child: Text(
-                      '0',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-            ]),
+            icon: CountBanner(
+              count: '1',
+              child: Icon(Icons.shopping_cart),
+            ),
             label: 'Cart',
           ),
         ],
@@ -71,8 +55,4 @@ class _MainScreenState extends State<MainScreen> {
       _selectedIndex = value;
     });
   }
-}
-
-class MyWidget extends BottomNavigationBarItem {
-  MyWidget({required super.icon});
 }

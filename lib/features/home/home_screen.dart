@@ -9,46 +9,32 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Welcome to Ecommerce'),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.search),
-          ),
-          Padding(
-            padding: context.paddingLow,
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.shopping_cart),
-                ),
-                Positioned(
-                  top: -0,
-                  right: -0,
-                  child: Container(
-                    width: 20,
-                    height: 20,
-                    decoration: const BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Center(
-                      child: Text(
-                        '0',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+      appBar: _buildAppBar(context),
       body: const Body(),
+    );
+  }
+
+  AppBar _buildAppBar(BuildContext context) {
+    return AppBar(
+      title: const Text('Welcome to Ecommerce'),
+      actions: [
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.search),
+        ),
+        Padding(
+          padding: context.paddingLow,
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.shopping_cart),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
