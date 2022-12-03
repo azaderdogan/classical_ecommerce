@@ -15,6 +15,7 @@ class RemoteRepository implements IRemoteRepository {
   @override
   Future<List<Product>> getProducts() async {
     final response = await _apiClient.getProducts();
-    return response.data.map<Product>((e) => Product.fromJson(e)).toList();
+    var products = response.data['products'] as List;
+    return products.map<Product>((e) => Product.fromJson(e)).toList();
   }
 }

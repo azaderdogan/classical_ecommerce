@@ -1,26 +1,29 @@
 part of 'widgets.dart';
 
 class ProductList extends StatelessWidget {
-  const ProductList({
+  ProductList({
     Key? key,
+    required this.items,
   }) : super(key: key);
+  final List<CartItem> items;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        itemCount: 10,
+        itemCount: items.length,
         itemBuilder: (context, index) {
+          var item = items[index];
           return Card(
             child: ListTile(
               leading: Image.network(
-                'https://images.freeimages.com/images/large-previews/8b6/pumpkin-1327212.jpg',
+                item.product.images!.first,
                 fit: BoxFit.fill,
                 width: 100,
                 height: 100,
               ),
-              title: Text('Title'),
-              subtitle: Text('Subtitle'),
+              title: Text(item.product.title!),
+              subtitle: Text(item.product.description!),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [

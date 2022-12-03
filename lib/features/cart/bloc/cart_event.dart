@@ -10,9 +10,9 @@ class CartEventRemoveFromCart extends CartEvent {
 }
 
 class CartEventAddToCart extends CartEvent {
-  final int productId;
+  final Product product;
 
-  CartEventAddToCart(this.productId);
+  CartEventAddToCart(this.product);
 }
 
 class CartEventLoadCart extends CartEvent {}

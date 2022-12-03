@@ -16,6 +16,7 @@ class Cart extends HiveObject {
     required this.totalPrice,
     required this.items,
   });
+  factory Cart.empty() => Cart(productsCount: 0, totalPrice: 0, items: []);
 
   @override
   String toString() =>

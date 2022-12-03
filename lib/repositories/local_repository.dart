@@ -16,16 +16,16 @@ abstract class ILocalRepository {
 }
 
 class LocalRepository implements ILocalRepository {
-  late final Box<Cart> _cart;
+  static late final Box<Cart> _cart;
 
-  LocalRepository() {
-    _openBoxes();
-  }
-  void _openBoxes() async {
+  LocalRepository();
+  static Future openBoxes() async {
     _cart = await _openHiveBox<Cart>("cart");
+    //register adapter
+   
   }
 
-  Future<Box<B>> _openHiveBox<B>(String boxName) async {
+  static Future<Box<B>> _openHiveBox<B>(String boxName) async {
     if (!kIsWeb && !Hive.isBoxOpen(boxName)) {
       Hive.init((await getApplicationDocumentsDirectory()).path);
     }
@@ -36,6 +36,7 @@ class LocalRepository implements ILocalRepository {
   Future<Cart> getCart() async {
     var cart =
         _cart.get('cart') ?? Cart(items: [], productsCount: 0, totalPrice: 0);
+
     return Future.value(cart);
   }
 

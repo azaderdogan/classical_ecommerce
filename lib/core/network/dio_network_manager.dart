@@ -5,7 +5,7 @@ import 'package:ecommerce_task/core/network/i_network_manager.dart';
 class DioNetworkManager implements INetworkManager {
   final Dio _dio = Dio(
     BaseOptions(
-      baseUrl: 'https://dummyjson.com/docs',
+      baseUrl: 'https://dummyjson.com',
     ),
   );
 

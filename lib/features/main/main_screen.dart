@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../widgets/widgets.dart';
+import '../cart/bloc/cart_bloc.dart';
 import '../cart/cart_screen.dart';
 import '../home/home_screen.dart';
 
@@ -18,14 +20,14 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       body: _buildBody(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
-        items: const [
+        items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: CountBanner(
-              count: '1',
+              count: context.watch<CartBloc>().cart.items.length.toString(),
               child: Icon(Icons.shopping_cart),
             ),
             label: 'Cart',
