@@ -13,6 +13,12 @@ abstract class ILocalRepository {
   Future<void> removeProductFromCart(Product product);
   Future<void> clearCart();
   Future<void> updateProductQuantity(Product product, int quantity);
+
+  Future<void> decreaseQuantity(int productId);
+
+  Future<void> onIncreaseQuantity(int productId);
+
+  Future<void> registerEmail(String email);
 }
 
 class LocalRepository implements ILocalRepository {
@@ -22,7 +28,6 @@ class LocalRepository implements ILocalRepository {
   static Future openBoxes() async {
     _cart = await _openHiveBox<Cart>("cart");
     //register adapter
-   
   }
 
   static Future<Box<B>> _openHiveBox<B>(String boxName) async {
@@ -79,5 +84,32 @@ class LocalRepository implements ILocalRepository {
         .reduce((value, element) => value + element)
         .toDouble();
     return saveCart(cart);
+  }
+
+  @override
+  Future<void> decreaseQuantity(int productId) async {
+    var cart = _cart.get('cart')!;
+    var item = cart.items.firstWhere((element) => element.id == productId);
+    item.quantity--;
+    cart.totalPrice -= item.product.price!;
+    cart.productsCount--;
+    await saveCart(cart);
+  }
+
+  @override
+  Future<void> onIncreaseQuantity(int productId) async {
+    var cart = _cart.get('cart')!;
+    var item = cart.items.firstWhere((element) => element.id == productId);
+    item.quantity++;
+    cart.totalPrice += item.product.price!;
+    cart.productsCount++;
+    await saveCart(cart);
+  }
+
+  @override
+  Future<void> registerEmail(String email) async {
+    var cart = _cart.get('cart')!;
+    cart.email = email;
+    return await saveCart(cart);
   }
 }

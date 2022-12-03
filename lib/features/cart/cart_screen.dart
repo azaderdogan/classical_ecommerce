@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kartal/kartal.dart';
 
+import '../../widgets/widgets.dart';
 import 'widget/widgets.dart';
 
 class CartScreen extends StatelessWidget {
@@ -29,26 +30,28 @@ class CartScreen extends StatelessWidget {
   Column _onCartLoadedState(Cart cart, BuildContext context) {
     return Column(
       children: [
-        ProductList(
-          items: cart.items,
-        ),
-        Container(
-          height: 50,
-          child: Row(
-            children: [
-              Expanded(
-                child: Text('Total: \ ',
-                    style: context.textTheme.headline6!
-                        .copyWith(color: Colors.red)),
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: context.colorScheme.secondary,
+        ProductList(items: cart.items),
+        PaddingNormal(
+          child: Container(
+            height: 50,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text('Total: ${cart.totalPrice}',
+                      style: context.textTheme.headline6!
+                          .copyWith(color: Colors.red)),
                 ),
-                child: Text('Checkout'),
-              ),
-            ],
+                ElevatedButton(
+                  onPressed: () {
+                    context.read<CartBloc>().add(CartEventCheckout());
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: context.colorScheme.primary,
+                  ),
+                  child: Text('Checkout'),
+                ),
+              ],
+            ),
           ),
         ),
       ],

@@ -4,6 +4,7 @@ import 'package:ecommerce_task/core/network/dio_network_manager.dart';
 import 'package:ecommerce_task/features/home/home_screen.dart';
 import 'package:ecommerce_task/features/main/main_screen.dart';
 import 'package:ecommerce_task/features/product/product_screen.dart';
+import 'package:ecommerce_task/features/welcome/welcome_screen.dart';
 import 'package:ecommerce_task/model/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,12 +58,16 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData.dark(),
-          initialRoute: NavigationConstants.mainScreen,
+          initialRoute: NavigationConstants.welcomeScreen,
           onGenerateRoute: (settings) {
             switch (settings.name) {
               case NavigationConstants.mainScreen:
                 return MaterialPageRoute(
                   builder: (context) => const MainScreen(),
+                );
+              case NavigationConstants.welcomeScreen:
+                return MaterialPageRoute(
+                  builder: (context) => const WelcomeScreen(),
                 );
               case NavigationConstants.productDetail:
                 return MaterialPageRoute(

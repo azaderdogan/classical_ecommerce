@@ -11,6 +11,9 @@ class Cart extends HiveObject {
   double totalPrice;
   @HiveField(2)
   List<CartItem> items;
+  //email
+  @HiveField(3)
+  String? email;
   Cart({
     required this.productsCount,
     required this.totalPrice,
